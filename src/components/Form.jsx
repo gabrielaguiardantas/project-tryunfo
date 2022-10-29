@@ -1,115 +1,128 @@
 import React, { Component } from 'react';
-import GenericInput from './GenericInput';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
-  constructor() {
-    super();
-
-    this.handleChange = this.handleChange.bind(this);
-
-    this.state = {
-      inputName: '',
-      inputDescription: '',
-      inputAttr01: 0,
-      inputAttr02: 0,
-      inputAttr03: 0,
-      inputImage: '',
-      inputRare: 'normal',
-      inputTrunfo: false,
-    };
-  }
-
-  handleChange = ({ target }) => {
-    const { name } = target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-
-    this.setState({
-      [name]: value,
-    });
-  };
-
   render() {
-    const { inputName, inputDescription,
-      inputAttr01, inputAttr02, inputAttr03,
-      inputImage, inputRare, inputTrunfo } = this.state;
+    const { cardName, cardDescription,
+      cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, cardTrunfo,
+      hasTrunfo, onInputChange, isSaveButtonDisabled, onSaveButtonClick } = this.props;
     return (
-      <fieldset>
-        <GenericInput
-          name="inputName"
-          value={ inputName }
-          handleChange={ this.handleChange }
-          labelTitle="Nome"
-          type="text"
-          dataTestId="name-input"
-        />
-        <GenericInput
-          name="inputDescription"
-          value={ inputDescription }
-          handleChange={ this.handleChange }
-          labelTitle="Descrição"
-          type="textarea"
-          dataTestId="description-input"
-        />
-        <GenericInput
-          name="inputAttr01"
-          value={ inputAttr01 }
-          handleChange={ this.handleChange }
-          labelTitle="Attr01"
-          type="number"
-          dataTestId="attr1-input"
-        />
-        <GenericInput
-          name="inputAttr02"
-          value={ inputAttr02 }
-          handleChange={ this.handleChange }
-          labelTitle="Attr02"
-          type="number"
-          dataTestId="attr2-input"
-        />
-        <GenericInput
-          name="inputAttr03"
-          value={ inputAttr03 }
-          handleChange={ this.handleChange }
-          labelTitle="Attr03"
-          type="number"
-          dataTestId="attr3-input"
-        />
-        <GenericInput
-          name="inputImage"
-          value={ inputImage }
-          handleChange={ this.handleChange }
-          labelTitle="Imagem"
-          type="text"
-          dataTestId="image-input"
-        />
-        <label htmlFor="inputRare">
+      <form>
+        <h3 id="cardAdd">Adicione Nova Carta</h3>
+        <label htmlFor="name-input">
+          Nome
+          <input
+            type="text"
+            name="cardName"
+            data-testid="name-input"
+            value={ cardName }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="description-input">
+          Descrição
+          <input
+            type="textarea"
+            data-testid="description-input"
+            name="cardDescription"
+            value={ cardDescription }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="attr1-input">
+          Attr1
+          <input
+            type="number"
+            data-testid="attr1-input"
+            name="cardAttr1"
+            value={ cardAttr1 }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="attr2-input">
+          Attr2
+          <input
+            type="number"
+            data-testid="attr2-input"
+            name="cardAttr2"
+            value={ cardAttr2 }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="attr3-input">
+          Attr3
+          <input
+            type="number"
+            data-testid="attr3-input"
+            name="cardAttr3"
+            value={ cardAttr3 }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="image-input">
+          Imagem
+          <input
+            type="text"
+            data-testid="image-input"
+            name="cardImage"
+            value={ cardImage }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="rare-input">
           Raridade
           <select
-            name="inputRare"
-            value={ inputRare }
-            onChange={ this.handleChange }
+            id="rare-input"
+            name="cardRare"
             data-testid="rare-input"
-            id="inputRare"
+            value={ cardRare }
+            onChange={ onInputChange }
           >
-            <option defaultValue="normal">normal</option>
+            <option value="normal">normal</option>
             <option value="raro">raro</option>
             <option value="muito raro">muito raro</option>
           </select>
         </label>
-        <GenericInput
-          name="inputTrunfo"
-          value={ inputTrunfo }
-          handleChange={ this.handleChange }
-          labelTitle="Super Trybe Trunfo"
-          type="checkbox"
-          dataTestId="trunfo-input"
-        />
-        <button type="submit" data-testid="save-button">
-          Salvar
-        </button>
-      </fieldset>
+        <label htmlFor="trunfo-input">
+          <input
+            type="checkbox"
+            name="cardTrunfo"
+            id="trunfo-input"
+            data-testid="trunfo-input"
+            checked={ cardTrunfo }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="save-button">
+          <input
+            type="button"
+            value="Salvar"
+            disabled={ isSaveButtonDisabled }
+            data-testid="save-button"
+            name="save-button"
+            id="save-button"
+            onClick={ onSaveButtonClick }
+          />
+        </label>
+      </form>
     );
   }
 }
+
+Form.propTypes = {
+  cardName: PropTypes.string.isRequired,
+  cardDescription: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
+  cardImage: PropTypes.string.isRequired,
+  cardRare: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
+  isSaveButtonDisabled: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
+};
 
 export default Form;
