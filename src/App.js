@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
+import './App.css';
 
 class App extends React.Component {
   state = {
@@ -14,6 +15,7 @@ class App extends React.Component {
     cardAttr3: '0',
     isSaveButtonDisabled: true,
     savedCards: [],
+    hasTrunfo: false,
   };
 
   validateForm = () => {
@@ -54,7 +56,7 @@ class App extends React.Component {
   onSaveButtonClick = () => {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, savedCards,
+      cardImage, cardRare, cardTrunfo, savedCards, hasTrunfo,
     } = this.state;
     const savedCard = {
       cardImage,
@@ -65,8 +67,15 @@ class App extends React.Component {
       cardAttr3,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
     };
     savedCards.push(savedCard);
+    if (savedCards.some((card) => card.cardTrunfo === true)) {
+      console.log('entrando aqui');
+      this.setState({
+        hasTrunfo: true,
+      });
+    }
     this.setState({
       cardImage: '',
       cardName: '',
@@ -84,14 +93,16 @@ class App extends React.Component {
   render() {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, isSaveButtonDisabled,
+      cardImage, cardRare, cardTrunfo, isSaveButtonDisabled, hasTrunfo,
     } = this.state;
     return (
-      <div>
+      <div className="page">
         <Form
           onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.onSaveButtonClick }
+          hasTrunfo={ hasTrunfo }
+          className="form"
         />
         <Card
           cardImage={ cardImage }
