@@ -16,6 +16,9 @@ class App extends React.Component {
     isSaveButtonDisabled: true,
     savedCards: [],
     hasTrunfo: false,
+    filterValue1: '',
+    filterValue2: '',
+    filterValue3: false,
   };
 
   validateForm = () => {
@@ -105,10 +108,54 @@ class App extends React.Component {
     }
   };
 
+  filterCards1 = () => {
+    const { filterValue1, savedCards } = this.state;
+    const newCardsList = savedCards
+      .filter((card) => card.cardName.toLowerCase().includes(filterValue1.toLowerCase()));
+    this.setState({ savedCards: newCardsList });
+  };
+
+  changeValue1 = (event) => {
+    this.setState({
+      filterValue1: event.target.value,
+    }, () => this.filterCards1());
+  };
+
+  filterCards2 = () => {
+    const { filterValue2, savedCards } = this.state;
+    const newCardsList = savedCards
+      .filter((card) => card.cardRare.toLowerCase() === filterValue2.toLowerCase());
+    if (filterValue2 === 'todas') {
+      this.setState({ savedCards });
+    } else {
+      this.setState({ savedCards: newCardsList });
+    }
+  };
+
+  changeValue2 = (event) => {
+    this.setState({
+      filterValue2: event.target.value,
+    }, () => this.filterCards2());
+  };
+
+  filterCards3 = () => {
+    const { savedCards } = this.state;
+    const newCardsList = savedCards
+      .filter((card) => card.cardTrunfo === true);
+    this.setState({ savedCards: newCardsList });
+  };
+
+  changeValue3 = (event) => {
+    this.setState({
+      filterValue3: event.target.checked,
+    }, () => this.filterCards3());
+  };
+
   render() {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, savedCards,
+      cardImage, cardRare, cardTrunfo,
+      savedCards, filterValue1, filterValue2, filterValue3,
     } = this.state;
     return (
       <div className="page">
@@ -151,7 +198,48 @@ class App extends React.Component {
             </div>
           ))
         }
+        <label htmlFor="name-filter">
+          Filtro pelo nome:
+          <input
+            type="text"
+            name="name-filter"
+            id="name-filter"
+            data-testid="name-filter"
+            value={ filterValue1 }
+            onChange={ this.changeValue1 }
+            disabled={ filterValue3 }
+          />
+        </label>
+        <label htmlFor="rare-filter">
+          Filtro pela raridade:
+          <select
+            name="rare-filter"
+            id="rare-filter"
+            data-testid="rare-filter"
+            value={ filterValue2 }
+            onChange={ this.changeValue2 }
+            disabled={ filterValue3 }
+          >
+            <option defaultValue="todas">todas</option>
+            <option value="normal">normal</option>
+            <option value="raro">raro</option>
+            <option value="muito raro">muito raro</option>
+
+          </select>
+        </label>
+        <label htmlFor="trunfo-filter">
+          Super Trunfo
+          <input
+            type="checkbox"
+            name="trunfo-filter"
+            id="trunfo-filter"
+            data-testid="trunfo-filter"
+            value={ filterValue3 }
+            onChange={ this.changeValue3 }
+          />
+        </label>
       </div>
+
     );
   }
 }
