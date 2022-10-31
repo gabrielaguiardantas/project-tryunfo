@@ -71,7 +71,6 @@ class App extends React.Component {
     };
     savedCards.push(savedCard);
     if (savedCards.some((card) => card.cardTrunfo === true)) {
-      console.log('entrando aqui');
       this.setState({
         hasTrunfo: true,
       });
@@ -88,6 +87,22 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       savedCards,
     });
+  };
+
+  handleCards = (index) => {
+    const { savedCards } = this.state;
+    savedCards.splice(index, 1);
+    if (savedCards.some((card) => card.cardTrunfo === true)) {
+      this.setState({
+        hasTrunfo: true,
+        savedCards,
+      });
+    } else {
+      this.setState({
+        hasTrunfo: false,
+        savedCards,
+      });
+    }
   };
 
   render() {
@@ -126,6 +141,13 @@ class App extends React.Component {
                 cardRare={ card.cardRare }
                 cardTrunfo={ card.cardTrunfo }
               />
+              <button
+                onClick={ () => this.handleCards(index) }
+                type="button"
+                data-testid="delete-button"
+              >
+                Excluir
+              </button>
             </div>
           ))
         }
