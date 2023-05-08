@@ -6,6 +6,6 @@ Nono projeto do curso de desenvolvimento Web da Trybe e terceiro projeto do mód
 - Passagem de props entre componentes Pai-filho;
 - Renderização condicional; 
 
-<!-- ## Demonstração: ##
+## Demonstração: ##
 
-Pendente de estilização -->
+Em construção :construction:
