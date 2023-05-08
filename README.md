@@ -6,6 +6,6 @@ Nono projeto do curso de desenvolvimento Web da Trybe e terceiro projeto do mód
 -Passagem de props entre componentes Pai-filho
 -Renderização condicional 
 
-## Demonstração: ##
+<!-- ## Demonstração: ##
 
-<!-- Seguimos no React e dessa vez aprendemos a manipular o estado, passamos props entre componentes pai-filho, renderizamos componentes condicionalmente e criamos uma aplicação que nos possibilita montar um saudoso joguinho de cartas que a minha geração brincou muitooo "Super Trunfo".  -->
+Pendente de estilização -->
