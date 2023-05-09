@@ -9,3 +9,5 @@ Nono projeto do curso de desenvolvimento Web da Trybe e terceiro projeto do mód
 ## Demonstração: ##
 
 Em construção :construction:
+
+## Features implementadas: ##
