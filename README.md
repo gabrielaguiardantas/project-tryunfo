@@ -11,3 +11,5 @@ Nono projeto do curso de desenvolvimento Web da Trybe e terceiro projeto do mód
 Em construção :construction:
 
 ## Features implementadas: ##
+
+![features-project8](https://github.com/gabrielaguiardantas/project-tryunfo/assets/110852595/3462b17c-62c3-4911-95fa-4c6f28e8f7bd)
